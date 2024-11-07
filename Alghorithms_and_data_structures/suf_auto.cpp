@@ -1,5 +1,3 @@
-// no_concepts
-
 #include <algorithm>
 #include <iostream>
 #include <vector>
