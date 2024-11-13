@@ -1,0 +1,24 @@
+-- Создание таблицы names
+CREATE TABLE csmarket.names (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    gun VARCHAR(255) NOT NULL,
+    skin VARCHAR(255) DEFAULT '',
+    quality VARCHAR(255) DEFAULT 'Not Painted',
+    stat_track BOOLEAN DEFAULT FALSE
+);
+
+CREATE INDEX idx_full_name ON csmarket.names (full_name); 
+-- так как на каком-то моменте стало много запросов вида 
+-- SELECT id FROM csmarket.names WHERE full_name = 'Example';
+
+-- Создание таблицы prices с внешним ключом
+CREATE TABLE csmarket.prices (
+    id SERIAL,
+    price NUMERIC(10, 2) DEFAULT 0, 
+    volume INT DEFAULT 0, 
+    time TIMESTAMP DEFAULT now(),  
+    FOREIGN KEY (id) REFERENCES csmarket.names(id) 
+);
+CREATE INDEX idx_time ON csmarket.prices (time DESC);
+
